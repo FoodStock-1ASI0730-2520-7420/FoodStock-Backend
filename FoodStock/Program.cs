@@ -1,5 +1,10 @@
 using Cortex.Mediator.Commands;
 using Cortex.Mediator.DependencyInjection;
+using FoodStock.Inventory.Application.Internal.CommandServices;
+using FoodStock.Inventory.Application.Internal.QueryServices;
+using FoodStock.Inventory.Domain.Repositories;
+using FoodStock.Inventory.Domain.Services;
+using FoodStock.Inventory.Infrastructure.Persistence.EFC.Repositories;
 using FoodStock.Shared.Domain.Repositories;
 using FoodStock.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using FoodStock.Shared.Infrastructure.Mediator.Cortex.Configuration;
@@ -8,12 +13,15 @@ using FoodStock.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
+
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -92,6 +100,13 @@ builder.Services.AddSwaggerGen(options =>
 // Shared Bounded Context
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IDishRepository, DishRepository>();
+
+builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
+builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
+builder.Services.AddScoped<IDishCommandService, DishCommandService>();
+builder.Services.AddScoped<IDishQueryService, DishQueryService>();
 //builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
 
 // Mediator Configuration

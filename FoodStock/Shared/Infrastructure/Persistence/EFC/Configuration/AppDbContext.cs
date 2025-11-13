@@ -1,4 +1,5 @@
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
+using FoodStock.Inventory.Domain.Model.Aggregates;
 using FoodStock.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,8 @@ namespace FoodStock.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
+    public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<Dish> Dishes { get; set; } = null!;
     /// <summary>
     ///     On configuring the database context
     /// </summary>
