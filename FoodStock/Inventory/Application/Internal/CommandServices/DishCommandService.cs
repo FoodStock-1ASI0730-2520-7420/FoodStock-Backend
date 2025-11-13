@@ -19,18 +19,15 @@ public class DishCommandService : IDishCommandService
 
     public async Task<Dish> Handle(CreateDishCommand command)
     {
-        // Primero se crea el Dish sin ingredientes
-        var dish = new Dish(command.Name);
+        var dish = new Dish(command.Name, command.PriceUnit);
         await _repo.AddAsync(dish);
-        await _uow.CompleteAsync(); // Esto genera el Dish.Id
+        await _uow.CompleteAsync();
 
-        // Luego se crean los ingredientes con el DishId asignado
         var ingredients = command.Ingredients
             .Select(i => new DishIngredient(i.ProductId, i.Quantity, dish.Id))
             .ToList();
 
-        dish.AddIngredients(ingredients); // Método que agrega la lista
-
+        dish.AddIngredients(ingredients);
         _repo.Update(dish);
         await _uow.CompleteAsync();
 
@@ -46,8 +43,8 @@ public class DishCommandService : IDishCommandService
             .Select(i => new DishIngredient(i.ProductId, i.Quantity, dish.Id))
             .ToList();
 
-        dish.Edit(command.Name, ingredients);
-
+        dish.Edit(command.Name, command.PriceUnit, ingredients);
+        
         _repo.Update(dish);
         await _uow.CompleteAsync();
 

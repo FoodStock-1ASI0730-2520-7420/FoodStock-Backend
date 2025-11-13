@@ -1,2 +1,3 @@
 namespace FoodStock.Inventory.Interfaces.REST.Resources.Dishes;
-public record CreateDishResource(string Name, IEnumerable<DishIngredientResource> Ingredients);
+
+public record CreateDishResource(string Name, decimal PriceUnit, IEnumerable<DishIngredientResource> Ingredients);

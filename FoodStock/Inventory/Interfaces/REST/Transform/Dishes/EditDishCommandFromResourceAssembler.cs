@@ -5,5 +5,5 @@ namespace FoodStock.Inventory.Interfaces.REST.Transform.Dishes;
 public static class EditDishCommandFromResourceAssembler
 {
     public static EditDishCommand ToCommand(long id, EditDishResource r) =>
-        new(id, r.Name, r.Ingredients.Select(i => (i.ProductId, i.Quantity)));
+        new(id, r.Name, r.PriceUnit, r.Ingredients.Select(i => (i.ProductId, i.Quantity)));
 }
