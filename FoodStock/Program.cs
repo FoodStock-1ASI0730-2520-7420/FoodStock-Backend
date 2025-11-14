@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Cortex.Mediator.Commands;
 using Cortex.Mediator.DependencyInjection;
 using FoodStock.Inventory.Application.Internal.CommandServices;
@@ -5,6 +6,11 @@ using FoodStock.Inventory.Application.Internal.QueryServices;
 using FoodStock.Inventory.Domain.Repositories;
 using FoodStock.Inventory.Domain.Services;
 using FoodStock.Inventory.Infrastructure.Persistence.EFC.Repositories;
+using FoodStock.Sales.Application.Internal.CommandServices;
+using FoodStock.Sales.Application.Internal.QueryServices;
+using FoodStock.Sales.Domain.Repositories;
+using FoodStock.Sales.Domain.Services;
+using FoodStock.Sales.Infrastructure.Persistence.EFC.Repositories;
 using FoodStock.Shared.Domain.Repositories;
 using FoodStock.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using FoodStock.Shared.Infrastructure.Mediator.Cortex.Configuration;
@@ -20,7 +26,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
+builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention())).AddJsonOptions(options => {
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -99,6 +107,13 @@ builder.Services.AddSwaggerGen(options =>
 
 // Shared Bounded Context
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Sales Bounded Context
+builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+builder.Services.AddScoped<ISaleItemRepository, SaleItemRepository>();
+builder.Services.AddScoped<ISaleCommandService, SaleCommandService>();
+builder.Services.AddScoped<ISaleQueryService, SaleQueryService>();
+builder.Services.AddScoped<ISaleItemQueryService, SaleItemQueryService>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IDishRepository, DishRepository>();
