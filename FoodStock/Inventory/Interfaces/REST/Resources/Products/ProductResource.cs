@@ -1,2 +1,0 @@
-namespace FoodStock.Inventory.Interfaces.REST.Resources.Products;
-public record ProductResource(long Id, string Name, decimal UnitPrice, decimal Quantity, decimal TotalPrice, DateTime? ExpirationDate, string Category, bool Deleted);
