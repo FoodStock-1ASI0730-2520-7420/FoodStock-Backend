@@ -16,6 +16,10 @@ using FoodStock.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using FoodStock.Shared.Infrastructure.Mediator.Cortex.Configuration;
 using FoodStock.Shared.Infrastructure.Persistence.EFC.Configuration;
 using FoodStock.Shared.Infrastructure.Persistence.EFC.Repositories;
+using FoodStock.Suppliers.Application.Internal.CommandServices;
+using FoodStock.Suppliers.Application.Internal.QueryServices;
+using FoodStock.Suppliers.Domain.Repositories;
+using FoodStock.Suppliers.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -122,6 +126,15 @@ builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
 builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
 builder.Services.AddScoped<IDishCommandService, DishCommandService>();
 builder.Services.AddScoped<IDishQueryService, DishQueryService>();
+
+// Suppliers Bounded Context
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+
+builder.Services.AddScoped<CreateSupplierCommandService>();
+builder.Services.AddScoped<UpdateSupplierCommandService>();
+builder.Services.AddScoped<DeleteSupplierCommandService>();
+builder.Services.AddScoped<GetAllSuppliersQueryService>();
+builder.Services.AddScoped<GetSupplierByIdQueryService>();
 //builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
 
 // Mediator Configuration

@@ -2,6 +2,8 @@ using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using FoodStock.Inventory.Domain.Model.Aggregates;
 using FoodStock.Sales.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using FoodStock.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
+using FoodStock.Suppliers.Domain.Model.Aggregate;
+using FoodStock.Suppliers.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoodStock.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -10,6 +12,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Dish> Dishes { get; set; } = null!;
+    public DbSet<Supplier> Suppliers { get; set; } = null!;
     /// <summary>
     ///     On configuring the database context
     /// </summary>
@@ -41,6 +44,8 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         // Sales Context
         builder.ApplySalesConfiguration();
+        
+        builder.AddSuppliers();
         
         // General Naming Convention for the database objects
         builder.UseSnakeCaseNamingConvention();
