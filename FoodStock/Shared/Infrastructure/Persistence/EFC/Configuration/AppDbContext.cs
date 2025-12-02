@@ -1,5 +1,6 @@
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using FoodStock.Inventory.Domain.Model.Aggregates;
+using FoodStock.Reservations.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using FoodStock.Sales.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using FoodStock.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using FoodStock.Suppliers.Domain.Model.Aggregate;
@@ -44,7 +45,8 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         // Sales Context
         builder.ApplySalesConfiguration();
-        
+        // Reservations Context
+        builder.ApplyReservationsConfiguration();
         builder.AddSuppliers();
         
         // General Naming Convention for the database objects

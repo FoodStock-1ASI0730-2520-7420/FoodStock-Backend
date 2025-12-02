@@ -6,6 +6,11 @@ using FoodStock.Inventory.Application.Internal.QueryServices;
 using FoodStock.Inventory.Domain.Repositories;
 using FoodStock.Inventory.Domain.Services;
 using FoodStock.Inventory.Infrastructure.Persistence.EFC.Repositories;
+using FoodStock.Reservations.Application.Internal.CommandServices;
+using FoodStock.Reservations.Application.Internal.QueryServices;
+using FoodStock.Reservations.Domain.Repositories;
+using FoodStock.Reservations.Domain.Services;
+using FoodStock.Reservations.Infrastructure.Persistence.EFC.Repositories;
 using FoodStock.Sales.Application.Internal.CommandServices;
 using FoodStock.Sales.Application.Internal.QueryServices;
 using FoodStock.Sales.Domain.Repositories;
@@ -135,6 +140,19 @@ builder.Services.AddScoped<UpdateSupplierCommandService>();
 builder.Services.AddScoped<DeleteSupplierCommandService>();
 builder.Services.AddScoped<GetAllSuppliersQueryService>();
 builder.Services.AddScoped<GetSupplierByIdQueryService>();
+
+// Reservations Bounded Context
+builder.Services.AddScoped<ITableRepository, TableRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IAvailabilityService, AvailabilityService>();
+builder.Services.AddScoped<TableCommandService>();
+builder.Services.AddScoped<TableQueryService>();
+builder.Services.AddScoped<ReservationCommandService>();
+builder.Services.AddScoped<ReservationQueryService>();
+
+
+
+
 //builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
 
 // Mediator Configuration
