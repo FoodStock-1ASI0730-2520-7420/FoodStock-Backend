@@ -1,6 +1,14 @@
 using System.Text.Json.Serialization;
 using Cortex.Mediator.Commands;
 using Cortex.Mediator.DependencyInjection;
+using FoodStock.IAM.Application.Internal.CommandServices;
+using FoodStock.IAM.Application.Internal.OutboundServices;
+using FoodStock.IAM.Application.Internal.QueryServices;
+using FoodStock.IAM.Domain.Repositories;
+using FoodStock.IAM.Domain.Services;
+using FoodStock.IAM.Infrastructure.Hashing;
+using FoodStock.IAM.Infrastructure.Persistence;
+using FoodStock.IAM.Infrastructure.Tokens;
 using FoodStock.Inventory.Application.Internal.CommandServices;
 using FoodStock.Inventory.Application.Internal.QueryServices;
 using FoodStock.Inventory.Domain.Repositories;
@@ -151,7 +159,12 @@ builder.Services.AddScoped<ReservationCommandService>();
 builder.Services.AddScoped<ReservationQueryService>();
 
 
-
+// IAM Bounded Context
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IHashingService, HashingService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
 
 //builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
 

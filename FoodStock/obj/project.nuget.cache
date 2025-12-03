@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aiWT/lQeE48=",
+  "dgSpecHash": "fnblR/cxGg0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ACER\\RiderProjects\\FoodStock-Backend\\FoodStock\\FoodStock.csproj",
+  "projectFilePath": "D:\\dasda\\FoodStock\\FoodStock.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
