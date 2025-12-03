@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FoodStock.IAM.Interfaces.REST.Controllers;
 
 [ApiController]
-[Route("users")]
+[Route("api/v1/users")]
 public class UsersController : ControllerBase
 {
     private readonly IUserCommandService _commandService;

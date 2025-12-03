@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FoodStock.IAM.Interfaces.REST.Controllers;
 
 [ApiController]
-[Route("auth")]
+[Route("api/v1/auth")]
 public class AuthenticationController : ControllerBase
 {
     private readonly IUserCommandService _commandService;
