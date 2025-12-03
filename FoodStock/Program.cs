@@ -14,6 +14,8 @@ using FoodStock.Inventory.Application.Internal.QueryServices;
 using FoodStock.Inventory.Domain.Repositories;
 using FoodStock.Inventory.Domain.Services;
 using FoodStock.Inventory.Infrastructure.Persistence.EFC.Repositories;
+using FoodStock.Reports.ReportsInventory.Application.QueryServices;
+using FoodStock.Reports.SalesReports.Application.QueryServices;
 using FoodStock.Reservations.Application.Internal.CommandServices;
 using FoodStock.Reservations.Application.Internal.QueryServices;
 using FoodStock.Reservations.Domain.Repositories;
@@ -165,6 +167,12 @@ builder.Services.AddScoped<IHashingService, HashingService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserCommandService, UserCommandService>();
 builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+
+// Reports - Sales
+builder.Services.AddScoped<SalesReportQueryService>();
+
+// Reports - Inventory  
+builder.Services.AddScoped<InventoryReportQueryService>();
 
 //builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
 

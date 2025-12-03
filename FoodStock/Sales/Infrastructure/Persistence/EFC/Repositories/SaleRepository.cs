@@ -8,9 +8,10 @@ namespace FoodStock.Sales.Infrastructure.Persistence.EFC.Repositories;
 
 public class SaleRepository(AppDbContext context) : BaseRepository<Sale>(context), ISaleRepository
 {
-    public new async Task<IEnumerable<Sale>> ListAsync()
+     public new async Task<IEnumerable<Sale>> ListAsync()
     {
         return await Context.Set<Sale>()
+            .Include(s => s.SaleItems)  
             .ToListAsync();
     }
 
