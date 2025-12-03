@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\dasda\\FoodStock\\FoodStock.csproj": {}
+    "D:\\Github\\backend-foodstock\\FoodStock-Backend\\FoodStock\\FoodStock.csproj": {}
   },
   "projects": {
-    "D:\\dasda\\FoodStock\\FoodStock.csproj": {
+    "D:\\Github\\backend-foodstock\\FoodStock-Backend\\FoodStock\\FoodStock.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\dasda\\FoodStock\\FoodStock.csproj",
+        "projectUniqueName": "D:\\Github\\backend-foodstock\\FoodStock-Backend\\FoodStock\\FoodStock.csproj",
         "projectName": "FoodStock",
-        "projectPath": "D:\\dasda\\FoodStock\\FoodStock.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\dasda\\FoodStock\\obj\\",
+        "projectPath": "D:\\Github\\backend-foodstock\\FoodStock-Backend\\FoodStock\\FoodStock.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "D:\\Github\\backend-foodstock\\FoodStock-Backend\\FoodStock\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -114,24 +118,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.11, 9.0.11]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[9.0.11, 9.0.11]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.11, 9.0.11]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[9.0.11, 9.0.11]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -140,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\ACER\\.dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
