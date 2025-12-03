@@ -5,12 +5,13 @@ using FoodStock.Reservations.Application.Internal.QueryServices;
 using FoodStock.Reservations.Interfaces.REST.Resources;
 using FoodStock.Reservations.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore; // <-- IMPORTANTE para DbUpdateException
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace FoodStock.Reservations.Interfaces.REST.Controllers;
 
 [ApiController]
-[Route("tables")]
+[Route("api/v1/tables")]
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Tables")]
 public class TablesController(TableQueryService query, TableCommandService commands) : ControllerBase
@@ -26,9 +27,36 @@ public class TablesController(TableQueryService query, TableCommandService comma
     [SwaggerResponse(StatusCodes.Status201Created, "Table created", typeof(TableResource))]
     public async Task<IActionResult> CreateAsync([FromBody] CreateTableResource body)
     {
-        var created = await commands.CreateAsync(body.Number, body.Capacity);
-        var res = TableResourceAssembler.ToResource(created);
-        return CreatedAtAction(nameof(ListAsync), new { id = res.Id }, res);
+        try
+        {
+            var created = await commands.CreateAsync(body.Number, body.Capacity);
+            var res = TableResourceAssembler.ToResource(created);
+
+            // Location manual para evitar 500 si no hay GetById
+            var location = $"{Request.Path}/{res.Id}";
+            return Created(location, res);
+        }
+        // Específicas primero (valores fuera de rango)
+        catch (ArgumentOutOfRangeException ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
+        // Duplicados/constraints desde EF (índice único, etc.)
+        catch (DbUpdateException ex)
+        {
+            // Mensaje genérico como conflicto; evita 500
+            return Conflict(new { error = "La mesa ya existe o hay un conflicto de datos.", detail = ex.InnerException?.Message ?? ex.Message });
+        }
+        // Reglas de dominio (p.ej. número ya existe, validaciones previas)
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+        // Más general al final (argumentos inválidos)
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
     }
 
     [HttpDelete("{id:int}")]
