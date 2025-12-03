@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FoodStock.Suppliers.Interfaces.REST;
 
 [ApiController]
-[Route("api/suppliers")]
+[Route("api/v1/suppliers")]
 public class SupplierController : ControllerBase
 {
     private readonly CreateSupplierCommandService _createService;

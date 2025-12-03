@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FoodStock.Inventory.Interfaces.REST;
 
 [ApiController]
-[Route("api/dishes")]
+[Route("api/v1/dishes")]
 public class DishController : ControllerBase
 {
     private readonly IDishCommandService _cmd;
