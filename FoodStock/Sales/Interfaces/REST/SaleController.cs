@@ -60,4 +60,37 @@ public class SaleController(
         var saleResources = sales.Select(SaleResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(saleResources);
     }
+    
+    [HttpPut("{saleId:int}")]
+    [SwaggerOperation(
+        Summary = "Update a sale",
+        Description = "Update a sale",
+        OperationId = "UpdateSale")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The sale was updated", typeof(SaleResource))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "The sale was not found")]
+    public async Task<IActionResult> UpdateSale([FromRoute] int saleId, [FromBody] UpdateSaleResource resource)
+    {
+        if(saleId != resource.Id)
+            return BadRequest();
+        var updateSaleCommand = UpdateSaleCommandFromResourceAssembler.ToCommandFromResource(resource);
+        var sale = await saleCommandService.Handle(updateSaleCommand);
+        if (sale is null) return NotFound();
+        var saleResource = SaleResourceFromEntityAssembler.ToResourceFromEntity(sale);
+        return Ok(saleResource);
+    }
+    
+    [HttpDelete("{saleId:int}")]
+    [SwaggerOperation(
+        Summary = "Delete a sale",
+        Description = "Delete a sale",
+        OperationId = "DeleteSale")]
+    [SwaggerResponse(StatusCodes.Status204NoContent, "The sale was deleted")]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "The sale was not found")]
+    public async Task<IActionResult> DeleteSale([FromRoute] int saleId)
+    {
+        var deleteSaleResource = new DeleteSaleResource(saleId);
+        var deleteSaleCommand = DeleteSaleCommandFromResourceAssembler.ToCommandFromResource(deleteSaleResource);
+        await saleCommandService.Handle(deleteSaleCommand);
+        return NoContent();
+    }
 }

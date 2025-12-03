@@ -19,4 +19,11 @@ public class SaleRepository(AppDbContext context) : BaseRepository<Sale>(context
         return await Context.Set<Sale>()
             .FirstOrDefaultAsync(sale => sale.Id == id);
     }
+
+    public async Task<Sale?> FindByIdWithSaleItemsAsync(int id)
+    {
+        return await Context.Set<Sale>()
+            .Include(sale => sale.SaleItems)
+            .FirstOrDefaultAsync(sale => sale.Id == id);
+    }
 }

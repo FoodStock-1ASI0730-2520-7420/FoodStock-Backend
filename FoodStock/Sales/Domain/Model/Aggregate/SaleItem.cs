@@ -19,6 +19,11 @@ public partial class SaleItem
     {
     }
     
+    public SaleItem(SaleItemDto dto, Dish dish, int saleId)
+        : this(dish.Id, dish.Name, dish.PriceUnit, dto.Quantity, saleId)
+    {
+    }
+    
     public int Id { get; }
     public long DishId { get; private set; }
     public string Name { get; private set; }
@@ -26,4 +31,6 @@ public partial class SaleItem
     public int Quantity { get; private set; }
     public Sale Sale { get; internal set; }
     public int SaleId { get; private set; }
+    
+    public record SaleItemDto(int DishId, string Name, decimal PriceUnit, int Quantity);
 }

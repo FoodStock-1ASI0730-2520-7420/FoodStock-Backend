@@ -34,4 +34,17 @@ public partial class Sale
         _saleItems.Add(item);
         Total = _saleItems.Sum(i => i.PriceUnit * i.Quantity);
     }
+
+    public void ClearSaleItems()
+    {
+        _saleItems.Clear();
+        Total = 0;
+    }
+
+    public void UpdateDetails(ESaleType saleType, EPaymentMethod paymentMethod, string waiter)
+    {
+        SaleType = saleType;
+        PaymentMethod = paymentMethod;
+        Waiter = waiter;
+    }
 }

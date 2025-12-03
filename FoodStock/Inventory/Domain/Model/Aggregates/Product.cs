@@ -50,4 +50,10 @@ public partial class Product
     }
 
     public void Delete() => Deleted = true;
+    
+    public void AddStock(decimal amount)
+    {
+        if(amount <= 0) throw new ArgumentOutOfRangeException(nameof(amount), "Stock amount must be > 0");
+        Quantity += amount;
+    }
 }

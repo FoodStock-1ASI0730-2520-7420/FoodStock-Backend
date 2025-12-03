@@ -5,4 +5,5 @@ namespace FoodStock.Sales.Domain.Repositories;
 
 public interface ISaleRepository : IBaseRepository<Sale>
 {
+    Task<Sale?> FindByIdWithSaleItemsAsync(int id);
 }

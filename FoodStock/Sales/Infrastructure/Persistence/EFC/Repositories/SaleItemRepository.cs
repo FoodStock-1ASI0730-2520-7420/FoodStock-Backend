@@ -20,4 +20,9 @@ public class SaleItemRepository(AppDbContext context) : BaseRepository<SaleItem>
         return await Context.Set<SaleItem>()
             .FirstOrDefaultAsync(item => item.Id == id);
     }
+
+    public void RemoveSaleItem(SaleItem saleItem)
+    {
+        Context.Set<SaleItem>().Remove(saleItem);
+    }
 }
