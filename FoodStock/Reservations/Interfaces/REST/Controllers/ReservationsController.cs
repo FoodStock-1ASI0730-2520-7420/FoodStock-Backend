@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace FoodStock.Reservations.Interfaces.REST.Controllers;
 
 [ApiController]
-[Route("reservations")]
+[Route("api/v1/reservations")]
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Reservations")]
 public class ReservationsController(ReservationQueryService query, ReservationCommandService commands) : ControllerBase
